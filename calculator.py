@@ -14,11 +14,22 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(331, 501)
+        Form.resize(332, 509)
         font = QtGui.QFont()
         font.setFamily("RedDeadCyrillic2")
         font.setPointSize(14)
         Form.setFont(font)
+        Form.setStyleSheet("\n"
+"\n"
+"QPushButton{\n"
+"    text-align: center;\n"
+"}\n"
+"QPushButton:hover{\n"
+"    background-color:silver;\n"
+"}\n"
+"QPushButton:pressed{\n"
+"    background-color:gray;\n"
+"}")
         self.pushButton_1 = QtWidgets.QPushButton(Form)
         self.pushButton_1.setGeometry(QtCore.QRect(20, 140, 93, 51))
         font = QtGui.QFont()
@@ -148,19 +159,29 @@ class Ui_Form(object):
         self.pushButton_ce.setObjectName("pushButton_ce")
         self.pushButton_pow = QtWidgets.QPushButton(Form)
         self.pushButton_pow.setGeometry(QtCore.QRect(220, 80, 93, 51))
+        font = QtGui.QFont()
+        font.setFamily("RedDeadCyrillic2")
+        font.setPointSize(14)
+        self.pushButton_pow.setFont(font)
         self.pushButton_pow.setObjectName("pushButton_pow")
         self.pushButton_delsym = QtWidgets.QPushButton(Form)
         self.pushButton_delsym.setGeometry(QtCore.QRect(120, 80, 93, 51))
-        self.pushButton_delsym.setObjectName("pushButton_delsym")
-        self.textEdit = QtWidgets.QTextEdit(Form)
-        self.textEdit.setGeometry(QtCore.QRect(20, 20, 291, 51))
         font = QtGui.QFont()
-        font.setPointSize(16)
-        self.textEdit.setFont(font)
-        self.textEdit.setObjectName("textEdit")
+        font.setFamily("RedDeadCyrillic2")
+        font.setPointSize(14)
+        self.pushButton_delsym.setFont(font)
+        self.pushButton_delsym.setObjectName("pushButton_delsym")
         self.pushButton = QtWidgets.QPushButton(Form)
         self.pushButton.setGeometry(QtCore.QRect(220, 380, 91, 51))
         self.pushButton.setObjectName("pushButton")
+        self.lineEdit = QtWidgets.QLineEdit(Form)
+        self.lineEdit.setGeometry(QtCore.QRect(20, 20, 291, 51))
+        font = QtGui.QFont()
+        font.setFamily("RedDeadCyrillic2")
+        font.setPointSize(16)
+        self.lineEdit.setFont(font)
+        self.lineEdit.setStyleSheet("")
+        self.lineEdit.setObjectName("lineEdit")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)

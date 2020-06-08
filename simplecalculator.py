@@ -1,12 +1,11 @@
-from PyQt5 import QtWidgets,QtGui
+from PyQt5 import QtWidgets,QtGui,QtCore
 import calculator
 class CalcApp(QtWidgets.QMainWindow,calculator.Ui_Form):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.result = ''
-        self.textEdit.clear()
-        self.textEdit.append('')
+        self.lineEdit.clear()
         self.pushButton_0.pressed.connect(lambda: self.add_item(item=0))
         self.pushButton_1.pressed.connect(lambda: self.add_item(item=1))
         self.pushButton_2.pressed.connect(lambda: self.add_item(item=2))
@@ -30,37 +29,37 @@ class CalcApp(QtWidgets.QMainWindow,calculator.Ui_Form):
         self.pushButton_delsym.pressed.connect(self.delOneSymbol)
 
     def add_item(self,item):
-        self.result = self.textEdit.toPlainText()
+        self.result = self.lineEdit.text()
         self.result+=str(item)
-        self.textEdit.clear()
-        self.textEdit.append(self.result)
+        self.lineEdit.clear()
+        self.lineEdit.setText(self.result)
 
     def clear(self):
-        self.result = self.textEdit.toPlainText()
+        self.result = self.lineEdit.text()
         self.result = ''
-        self.textEdit.clear()
+        self.lineEdit.clear()
 
     def calculate(self):
         try:
-            self.textEdit.toPlainText().replace(' ','')
-            if str(self.textEdit.toPlainText() )!= '':
-                self.result = self.textEdit.toPlainText()
+            self.lineEdit.text().replace(' ','')
+            if str(self.lineEdit.text() )!= '':
+                self.result = self.lineEdit.text()
                 self.result=self.result.replace('^','**')
                 self.result=str(eval(self.result))
-                self.textEdit.clear()
-                self.textEdit.append(str(self.result))
+                self.lineEdit.clear()
+                self.lineEdit.setText(str(self.result))
 
 
         except:
-            self.result = self.textEdit.toPlainText()
-            self.textEdit.clear()
-            self.textEdit.append('ERROR')
+            self.result = self.lineEdit.text()
+            self.lineEdit.clear()
+            self.lineEdit.setText('ERROR')
 
     def delOneSymbol(self):
-        self.result = self.textEdit.toPlainText()
+        self.result = self.lineEdit.text()
         self.result = self.result[:-1]
-        self.textEdit.clear()
-        self.textEdit.append(str(self.result))
+        self.lineEdit.clear()
+        self.lineEdit.setText(str(self.result))
 
 app =QtWidgets.QApplication([])
 window=CalcApp()
