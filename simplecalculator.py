@@ -1,10 +1,12 @@
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets,QtGui
 import calculator
 class CalcApp(QtWidgets.QMainWindow,calculator.Ui_Form):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.result = ''
+        self.textEdit.clear()
+        self.textEdit.append('')
         self.pushButton_0.pressed.connect(lambda: self.add_item(item=0))
         self.pushButton_1.pressed.connect(lambda: self.add_item(item=1))
         self.pushButton_2.pressed.connect(lambda: self.add_item(item=2))
@@ -21,28 +23,47 @@ class CalcApp(QtWidgets.QMainWindow,calculator.Ui_Form):
         self.pushButton_del.pressed.connect(lambda: self.add_item(item="/"))
         self.pushButton_open.pressed.connect(lambda: self.add_item(item='('))
         self.pushButton_close.pressed.connect(lambda: self.add_item(item=')'))
+        self.pushButton_pow.pressed.connect(lambda: self.add_item(item='^'))
         self.pushButton_ce.pressed.connect(self.clear)
         self.pushButton_equal.pressed.connect(self.calculate)
+        self.pushButton_delsym.pressed.connect(self.delOneSymbol)
+
     def add_item(self,item):
+        self.result = self.textEdit.toPlainText()
         self.result+=str(item)
-        self.textBrowser.clear()
-        self.textBrowser.append(self.result)
+        self.textEdit.clear()
+        self.textEdit.append(self.result)
 
     def clear(self):
+        self.result = self.textEdit.toPlainText()
         self.result = ''
-        self.textBrowser.clear()
+        self.textEdit.clear()
 
     def calculate(self):
         try:
-            self.result=str(eval(self.result))
-            self.textBrowser.clear()
-            self.textBrowser.append(str(self.result))
+            self.textEdit.toPlainText().replace(' ','')
+            if str(self.textEdit.toPlainText() )!= '':
+                self.result = self.textEdit.toPlainText()
+                self.result=self.result.replace('^','**')
+                self.result=str(eval(self.result))
+                self.textEdit.clear()
+                self.textEdit.append(str(self.result))
+
+
         except:
-            self.textBrowser.clear()
-            self.textBrowser.append('на ноль делить нельзя!')
-            print(self.result)
+            self.result = self.textEdit.toPlainText()
+            self.textEdit.clear()
+            self.textEdit.append('ERROR')
+
+    def delOneSymbol(self):
+        self.result = self.textEdit.toPlainText()
+        self.result = self.result[:-1]
+        self.textEdit.clear()
+        self.textEdit.append(str(self.result))
 
 app =QtWidgets.QApplication([])
 window=CalcApp()
+window.setFixedSize(331, 501)
+window.setWindowIcon(QtGui.QIcon('D://calculator//icon.ico'))
 window.show()
 app.exec_()
