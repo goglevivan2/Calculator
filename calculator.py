@@ -119,7 +119,7 @@ class Ui_Form(object):
         self.pushButton_sub.setFont(font)
         self.pushButton_sub.setObjectName("pushButton_sub")
         self.pushButton_equal = QtWidgets.QPushButton(Form)
-        self.pushButton_equal.setGeometry(QtCore.QRect(220, 380, 93, 111))
+        self.pushButton_equal.setGeometry(QtCore.QRect(220, 440, 93, 51))
         font = QtGui.QFont()
         font.setFamily("RedDeadCyrillic2")
         font.setPointSize(14)
@@ -158,6 +158,9 @@ class Ui_Form(object):
         font.setPointSize(16)
         self.textEdit.setFont(font)
         self.textEdit.setObjectName("textEdit")
+        self.pushButton = QtWidgets.QPushButton(Form)
+        self.pushButton.setGeometry(QtCore.QRect(220, 380, 91, 51))
+        self.pushButton.setObjectName("pushButton")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -185,3 +188,4 @@ class Ui_Form(object):
         self.pushButton_ce.setText(_translate("Form", "CE"))
         self.pushButton_pow.setText(_translate("Form", "^"))
         self.pushButton_delsym.setText(_translate("Form", "C"))
+        self.pushButton.setText(_translate("Form", "."))
